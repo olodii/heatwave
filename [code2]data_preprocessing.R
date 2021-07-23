@@ -11,23 +11,27 @@ setwd("C://Users//USER//Desktop//kej//univ//2021-1학기 연구//폭염//github_
 
 summary(df.1y)
 
-# 사망 장소 >> 병원에서 사망 시 전날로 처리, 도로에서 사망 제외....! >> case 적어서 제외
-table(df.5y$d.place)
-df.5y <- subset(df.5y, !d.place %in% c(5, 99))
-df.5y$hospi <- ifelse(df.5y$d.place==2,1,0)
-# 사망 시간 >> 병원 외부여도 12시간내 사망은 전날로 처리
-table(df.5y$d.hour)
-df.5y <- subset(df.5y, d.hour!=99)
-# 사망 주소 >> 시도 코드; 세종과 제주는 제외
-unique(df.5y$d.address) %>% length()
-df.5y <- subset(df.5y, !d.address %in% c(29, 39))
+df.s <- df.1y
 
-nrow(df.5y) #최종 6124명! 
+# 사망 장소 >> 병원에서 사망 시 전날로 처리, 도로에서 사망 제외....! >> case 적어서 제외
+table(df.s$d.place)
+df.s <- subset(df.s, !d.place %in% c(5, 99))
+df.s$hospi <- ifelse(df.s$d.place==2,1,0)
+# 사망 시간 >> 병원 외부여도 12시간내 사망은 전날로 처리
+table(df.s$d.hour)
+df.s <- subset(df.s, d.hour!=99)
+# 사망 주소 >> 시도 코드; 세종과 제주는 제외
+unique(df.s$d.address) %>% length()
+unique(df.s$d.address)
+
+df.s <- subset(df.s, !d.address %in% c(29, 39))
+
+nrow(df.s) #최종 6124명! 
 ######################################################################################
 # 아래 둘 중 하나로 선택하여 진행!
 
 # (1) 전체 사망 포함 >> 6124명
-data <- df.5y
+data <- df.s
 
 # (2) 사망 이유 분류: S랑 T 빼고 자연사만 포함 >> 5528명
 data$d.r1 %>% table() %>% View()

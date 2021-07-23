@@ -28,3 +28,7 @@ control을 한달 전후로 보정하는 경우 month 까지 고려
 case crossover 디자인으로 개인노출과 관련된 보정 변수는 포함하지 않음
 지역차이가 발생할 수 있어 지역만 random effect로 고려
 
+(5) 분석 방법
+조건부 로지스틱 회귀 분석 사용
+random effect로 지역 차이 고려
+
